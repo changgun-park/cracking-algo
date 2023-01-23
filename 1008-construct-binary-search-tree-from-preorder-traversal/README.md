@@ -28,3 +28,5 @@
 	<li>All the values of <code>preorder</code> are <strong>unique</strong>.</li>
 </ul>
 </div>
+
+* [geeksForgeeks](https://www.geeksforgeeks.org/construct-bst-from-given-preorder-traversa/)에 여러가지 풀이법에 대한 비교가 있으므로 참고
