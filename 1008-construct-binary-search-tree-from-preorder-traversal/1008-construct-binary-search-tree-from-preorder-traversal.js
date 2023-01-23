@@ -11,42 +11,27 @@
  * @return {TreeNode}
  */
 
-const findIndexOfLarge = (arr) => {
-    for (let i = 0; i < arr.length; i++) {
-        if (arr[i] > arr[0]) return i;
-    }
-    return arr.length;
-}
-
 var bstFromPreorder = function(preorder) {
 
-    // 배열 길이가 1이면 탈출한다.
-    // 1. 배열에서 첫번째 요소보다 큰 요소를 찾는다.
-    // 2. 해당 요소를 right로 할당하고, 재귀 호출한다.
-    // 3. 작은 요소는 left로 할당하고, 재귀 호출한다.
     let root = new TreeNode(preorder[0]);
 
-    const recursiveConstruct = (preorder, root) => {
-        if (preorder.length <= 1) return;
-        
-        const pivot = findIndexOfLarge(preorder);
-        const left = preorder.slice(1, pivot);
-        const right = preorder.slice(pivot);
-
-        if (left.length) {
-            const leftRoot = new TreeNode(left[0]);
-            root.left = leftRoot;
-            recursiveConstruct(left, leftRoot)
-        }
-
-        if (right.length) {
-            const rightRoot = new TreeNode(right[0]);
-            root.right = rightRoot;
-            recursiveConstruct(right, rightRoot)
-        }
+    for (i = 1; i < preorder.length; i++) {
+        root = insert(root, preorder[i]);
     }
-
-    recursiveConstruct(preorder, root);
 
     return root;
 };
+
+
+// 재귀 활용이 깔끔한 풀이; return root를 통해 깔끔한 풀이가 가능함..!
+const insert = (root, val) => {
+
+    if (root === null) return new TreeNode(val);
+
+    if (val < root.val) root.left = insert(root.left, val);
+
+    if (val > root.val) root.right = insert(root.right, val);
+
+    return root;
+
+}
