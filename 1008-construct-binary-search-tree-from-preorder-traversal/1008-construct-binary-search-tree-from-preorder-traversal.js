@@ -11,27 +11,25 @@
  * @return {TreeNode}
  */
 
-var bstFromPreorder = function(preorder) {
-
-    let root = new TreeNode(preorder[0]);
-
-    for (i = 1; i < preorder.length; i++) {
-        root = insert(root, preorder[i]);
+const findIndexOfLarge = (arr) => {
+    for (let i = 0; i < arr.length; i++) {
+        if (arr[i] > arr[0]) return i;
     }
+    return arr.length;
+}
 
+var bstFromPreorder = function(preorder) {
+    
+    if (preorder.length === 0) return null;
+
+    const root = new TreeNode(preorder[0]);
+
+    const pivot = findIndexOfLarge(preorder);
+    
+    root.left =  bstFromPreorder(preorder.slice(1, pivot));
+    
+    root.right = bstFromPreorder(preorder.slice(pivot));
+    
+    
     return root;
 };
-
-
-// 재귀 활용이 깔끔한 풀이; return root를 통해 깔끔한 풀이가 가능함..!
-const insert = (root, val) => {
-
-    if (root === null) return new TreeNode(val);
-
-    if (val < root.val) root.left = insert(root.left, val);
-
-    if (val > root.val) root.right = insert(root.right, val);
-
-    return root;
-
-}
