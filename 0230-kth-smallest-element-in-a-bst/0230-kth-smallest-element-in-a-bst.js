@@ -16,7 +16,7 @@ var kthSmallest = function(root, k) {
     let result = null;
     
     const dfs = (node) => {
-        if (!node) return;
+        if (!node || result !== null) return;
         dfs(node.left);
         if (++index === k) result = node.val;
         dfs(node.right);
