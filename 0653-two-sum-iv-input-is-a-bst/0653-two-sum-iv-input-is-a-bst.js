@@ -15,29 +15,17 @@
 
 var findTarget = function(root, k) {
     let found = false;
-    const inorder = [];
+    const map = new Map();
 
-    const dfs = (node) => {
+    const helper = (node) => {
         if (!node) return;
-        dfs(node.left);
-        inorder.push(node.val);
-        dfs(node.right);
+        helper(node.left);
+        if (map.has(k - node.val)) found = true;
+        map.set(node.val, true);
+        helper(node.right);
     }
 
-    dfs(root);
-
-    const counter = {};
-    for (const val of inorder) {
-        const remainder = k - val;
-        if (remainder in counter) {
-            found = true;
-            break;
-        }
-        if (!(val in counter)) {
-            counter[val] = true;
-        }
-        
-    }
+    helper(root);
 
     return found;
 };
