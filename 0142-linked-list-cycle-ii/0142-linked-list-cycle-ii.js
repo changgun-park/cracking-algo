@@ -12,12 +12,12 @@
  */
 var detectCycle = function(head) {
     let current = head;
-    const visited = new Map();
+    const visited = new Set();
     while (current) {
         if (visited.has(current)) {
             return current; 
         }
-        visited.set(current, true)
+        visited.add(current)
         current = current.next;
     }
     return null;
