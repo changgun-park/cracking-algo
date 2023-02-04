@@ -7,9 +7,12 @@ class KthLargest {
         }
     }
 
-    // k를 어떻게 이쁘게 전달하지..
+    swap (pos1, pos2) {
+        [this.values[pos1], this.values[pos2]] = [this.values[pos2], this.values[pos1]]
+    }
+
     add (val) {
-        if (this.values.length < this.k) {
+       if (this.values.length < this.k) {
             this.values.push(val);
             this.bubbleUp();
         } else if (val > this.values[0]) {
@@ -21,13 +24,13 @@ class KthLargest {
 
     bubbleUp () {
         let idx = this.values.length - 1;
-        let parentIdx = Math.floor((idx - 1) / 2);
+        let parentIdx = ~~((idx - 1) / 2);
         
         while (idx > 0) {
             if (this.values[idx] < this.values[parentIdx]){
-                [this.values[idx], this.values[parentIdx]] = [this.values[parentIdx], this.values[idx]];
+                this.swap(idx, parentIdx);
                 idx = parentIdx;
-                parentIdx = Math.floor((idx - 1) / 2);
+                parentIdx = ~~((idx - 1) / 2);
             } else break;
         }
     }
@@ -56,7 +59,7 @@ class KthLargest {
 
             if (swap === null) break;
             
-            [this.values[idx], this.values[swap]] = [this.values[swap], this.values[idx]];
+            this.swap(idx, swap);
             
             idx = swap;
             leftIdx = idx * 2 + 1;
