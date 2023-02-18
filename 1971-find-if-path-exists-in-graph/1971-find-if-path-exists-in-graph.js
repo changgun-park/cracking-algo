@@ -20,8 +20,13 @@ var validPath = function(n, edges, source, destination) {
     }
 
     function dfs (current) {
-        // 종료 조건...재귀 못멈추나?
-        if (current === destination) result = true;
+        if (result === true) return;
+        if (current === destination) {
+            
+            result = true
+            return;
+        }
+        
         adjacencyList[current]?.forEach(neighbor => {
             if (!visited[neighbor]) {
                 visited[neighbor] = true;
