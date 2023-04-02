@@ -1,2 +1,3 @@
 # cracking-algo
-Collection of LeetCode questions to ace the coding interview! - Created using [LeetHub](https://github.com/QasimWani/LeetHub)
+
+## LeetCode에서 푼 "중요한" 문제들..
